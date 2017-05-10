@@ -74,24 +74,20 @@ class networkx_calc(object):
     
     ## 获取与genename有关的所有gene和基因属性
     def get_value(self, genename, ):
-        #network_node = [(unicode(genename), Genecode.objects.filter(geneName=genename).values("chrom","start","end")[0]),]
         time1 = time() 
         network_node = [unicode(genename),]
-        #network_edge = []
-        #contact_list = ContactSerializer.Meta.model.objects.filter(node1__geneName=genename).select_related("node1")
-        contact_list = Contact.objects.filter(node1__geneName=genename).select_related("node1")
+        contact_list = Contact.objects.filter(node1__geneName=genename).select_related("node2")
 
-        #node_list = [ contact_list[0]["node1_id"] ] + [ node["node2_id"] for node in contact_list ]      
-        #for contact in contact_list:	
-            #g = GenecodeSerializer.Meta.model.objects.filter(pk=contact["node2_id"]).values() #"geneName", "chrom", "start", "end")
-        #g = Genecode.objects.filter(pk__in=[contact["node2_id"] for contact in contact_list]) #.values() #"geneName", "chrom", "start", "end")
-        g= contact_list   
-        #nodename = a.geneName
-        #a.pop("geneName")
-        [ network_node.append(( a.node2.geneName, { "chrom":a.node2.chrom, "start":a.node2.start, "end":a.node2.end } )) for a in g ]
-        network_edge= [(unicode(genename), a.node2.geneName, { "attr":a.attr }) for a in g ]
         time2 = time()
-        print time2-time1
+        #[ network_node.append( ( a.geneName, { "chrom":a.chrom, "start":a.start, "end":a.end } )) for a in g ]
+        time3 = time()
+        network_node = [ ( a2.node2_id, { "chrom":a2.node2.chrom, "start":a2.node2.start, "end":a2.node2.end } ) for a2 in contact_list ]
+        
+        time4 = time()
+        print time3-time2, time4-time3
+        network_edge= [ (unicode(genename), a.node2.geneName, { "attr":a.attr }) for a in contact_list ]
+        time5 = time()
+        print time5-time1, time5-time4
         return {"nodes":network_node, "edges":network_edge}
 
 def networkx_json(request,genename="MUC3A"):
@@ -99,27 +95,25 @@ def networkx_json(request,genename="MUC3A"):
     G=nx.Graph()
     net = networkx_calc()
     values = net.get_value(genename)
-    G.add_nodes_from(values["nodes"])
+    #G.add_nodes_from(values["nodes"])
     G.add_edges_from(values["edges"])
 
     nodes = G.nodes()
     edges = G.edges()
     
     time4=time()
-    for node in nodes:
-        #net = networkx_calc()
-        network_dict = net.get_value(node)
-        #G.add_nodes_from(network_dict["nodes"])
-        contact_list = ContactSerializer.Meta.model.objects.filter(node1__geneName=node).values()
-        G.add_edges_from(network_dict["edges"])
-
-    time5 = time()
-    diff_nodes = list(set(G.nodes()).difference(set(nodes)))
-    G.remove_nodes_from(diff_nodes)
+    contact_list = Contact.objects.filter(node1__in=[ node[0] for node in values["nodes"]]).select_related("node1", "node2")
+    time5 = time() 
+    network_edges2 =  [ (contact.node1.geneName, contact.node2.geneName, {"attr":contact.attr})  for contact in contact_list ]
+    aa = G.add_edges_from(network_edges2)
+    time6 = time()
+    ## delet the secondary nodes
+    #diff_nodes = list(set(G.nodes()).difference(set(nodes)))
+    #G.remove_nodes_from(diff_nodes)
 
     data = json_graph.node_link_data(G)
-    time6 = time()    
-    print time6 - time3, time4-time3, time5-time4, time6-time5    
+    time7 = time()    
+    print time7 - time3, time4-time3, time5-time4, time6-time5, time7-time6 
     return  JsonResponse(data, safe=False)
 
 def network_test(request):
