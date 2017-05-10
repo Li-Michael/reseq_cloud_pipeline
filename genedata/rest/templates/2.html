@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+  $("p").load('https://public-api.wordpress.com/rest/v1/sites/wtmpeachtest.wordpress.com/posts');
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  
+    $.getJSON("https://public-api.wordpress.com/rest/v1/sites/wtmpeachtest.wordpress.com/posts",function(result){
+      $.each(result, function(i, field){
+        alert("test " + field)
+        $("p").append(field + " ");
+        alert("test" + field);
+
+      });
+    });
+ 
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  
+    $.getJSON("http://wiki.basepedia.com/genome/?genomeID=hg38",function(result){
+      $.each(result, function(i, field){
+        alert("test " + field)
+        $("p").append(field + " ");
+        alert("test" + field);
+
+      });
+    });
+ 
+});
+</script>
+
+</head>
+
+<body>
+
+<!--<button>获得 JSON 数据</button> -->
+<p></p>
+
+</body>
+</html>
+
+
+

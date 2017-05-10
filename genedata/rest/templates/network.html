@@ -1,0 +1,175 @@
+<html>  
+  <head>  
+	<meta charset="utf-8">  
+    <title>力导向图</title>  
+
+	<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>  
+  </head> 
+
+<style>
+
+
+</style>
+  <body>
+	<div>
+		<h1>Gene Network</h1>
+
+  	  <form method='post'>
+		{% csrf_token %}
+		{{ form.as_ul }}
+		<input id="search" type="submit" value="Search">
+	  </form> 
+	</div>
+<script>		   
+  //$('#search').click(function()){	
+	//var gene = {{ gene }};
+	//alert(gene);
+$.getJSON("http://127.0.0.1:8000/networkx/{{ gene }}/", function(ret){
+		var message = JSON.stringify(ret);
+		var nodes = ret["nodes"];
+		var edges = ret["links"];
+		//alert(JSON.stringify(ret["links"]));
+		
+
+		//var nodes = [{"name":"gg4"},{"name":"gg1"},{"name":"gg3"},{"name":"gg2"}];
+		//var edges = [{"source":0,"target":1},{"source":1,"target":2},{"source":1,"target":3}];
+
+		var width = 1200;
+		var height = 900;
+		
+		
+		var svg = d3.select("body")
+					.append("svg")
+					.attr("width",width)
+					.attr("height",height);
+		/*
+		var simulation = d3.forceSimulation()
+			.force("link", d3.forceLink().id(function(d) { return d.id; } ))
+			.force("center", d3.forceCenter(width/2, height/2));
+      */
+		var force = d3.layout.force()
+				.nodes(nodes)		//指定节点数组
+				.links(edges)		//指定连线数组
+				.size([width,height])	//指定范围
+				.linkDistance(200)	//指定连线长度
+				.charge(-1000);	//相互之间的作用力
+				//.charge( function(d) {return -500 * Math.sqrt(d.chrom)} );
+
+
+		force.start();	//开始作用
+
+		console.log(nodes);
+		console.log(edges);
+
+		var color = d3.scale.category20();		
+		//添加连线		
+		var svg_edges = svg.selectAll("line")
+							.data(edges)
+							.enter()
+							.append("line")
+							//.style("stroke","#ccc")
+							.style("stroke", function(d){
+								return color(d.attr);
+							})							
+							.style("stroke-width",1.2)
+							.style("stroke-opacity", 0.8);
+		
+
+				
+		//添加节点			
+		var svg_nodes = svg.selectAll("circle")
+							.data(nodes)
+							.enter()
+							.append("circle")
+							.attr("r",20)
+							.style("fill",function(d,i){
+								//return color(d.geneType);
+								return color(i);	
+							})
+
+							.on("mouseover", function(d) { mouseover_node(d); })
+      						.on("mouseout", function(d) { mouseout_node(d) })
+							.call(force.drag);	//使得节点能够拖动
+
+		//添加描述节点的文字
+		var svg_texts = svg.selectAll("text")
+							.data(nodes)
+							.enter()
+							.append("text")
+							.style("fill", "black")
+							.attr("dx", 20)
+							.attr("dy", 8)
+							.text(function(d){
+								return d.id;
+							});
+					
+
+	var mouseover_node = function(z){ 
+
+    	var neighbors = {};
+    	neighbors[z.index] = true;
+
+    	svg_edges.filter(function(d){
+        	if (d.source == z) {
+          		neighbors[d.target.index] = true
+          		return true
+        	} else if (d.target == z) {
+          	neighbors[d.source.index] = true
+          	return true
+        	} else {
+          		return false
+        	}
+      	})
+        .style("stroke-opacity", 1);
+
+    svg_nodes.filter(function(d){ return neighbors[d.index] })
+        .style("stroke-width", 3);
+
+    svg_texts.filter(function(d){ return !neighbors[d.index] })
+        .style("fill-opacity", 0.2);
+
+    svg_texts.filter(function(d){ return neighbors[d.index] })
+        .attr("font-size", 16)
+
+  };
+
+  var mouseout_node = function(z){ 
+    svg_edges
+      .style("stroke-opacity", 0.6);
+
+    svg_nodes
+      .style("stroke-width", 1)
+
+    svg_texts
+      .attr("font-size", 10)
+      .style("fill-opacity", 1)
+
+  };
+
+
+
+		force.on("tick", function(){	//对于每一个时间间隔
+		
+			 //更新连线坐标
+			 svg_edges.attr("x1",function(d){ return d.source.x; })
+			 		.attr("y1",function(d){ return d.source.y; })
+			 		.attr("x2",function(d){ return d.target.x; })
+			 		.attr("y2",function(d){ return d.target.y; });
+			 
+			 //更新节点坐标
+			 svg_nodes.attr("cx",function(d){ return d.x; })
+			 		.attr("cy",function(d){ return d.y; });
+
+			 //更新文字坐标
+			 svg_texts.attr("x", function(d){ return d.x; })
+			 	.attr("y", function(d){ return d.y; });
+		});
+	  });		  
+	//});
+  </script>  
+	
+	<div id="div"></div>
+
+  </body>  
+</html>  
