@@ -114,14 +114,15 @@
 	<div>
 		<h1>Gene Network</h1>
 
-  	  <form method='post'>
+  	  <form id="form" style="margin:0px;display:inline;" method='post'>
 		{% csrf_token %}
-		{{ form.as_ul }}
+		{{ form }}
 		<input id="search" type="submit" value="Search">
+		<div id="geneinfo" style="display:inline;" ><div>
 	  </form> 
 	</div>
 
-	<div id="network">
+	<div id="network" style="height:800" >
 
     <script>
             // Function for moving nodes to front
@@ -148,8 +149,8 @@
             var smallCircleSize = 4.5 * 2;
             var largeCircleSize = 9 * 1.5;
 
-            var minWidthPoly1 = 255;
-            var minWidthPoly2 = 355;
+            var minWidthPoly1 = 235;
+            var minWidthPoly2 = 335;
             var xMargin = 20;
             var yPosFaculty = 170;
             var yPosEntry = 90;
@@ -183,7 +184,7 @@
 
             // Configure force layout
             var force = d3.layout.force()
-							.gravity(.03)
+							//.gravity(.03)
 							.charge(-500);
 			
 	$.getJSON("http://127.0.0.1:8000/networkx/{{ gene }}/", function(ret){
@@ -283,7 +284,7 @@
 
 
             //Initialize SVG
-            var graph = d3.select("body").append("svg")
+            var graph = d3.select("#network").append("svg")
               .append("g")
                 .attr("class", "graph")
                 .on("mousedown", function(){
@@ -353,7 +354,7 @@
 
             // Instructions for clicking on filter
             var instructions = legendContainer.append("text")
-                .attr("x", xMargin + 25)
+                .attr("x", xMargin + 15)
                 .attr("y", 400)
                 .style("fill", "#e8941a")
                 .text("CLICK TO FILTER");
@@ -676,7 +677,7 @@
             function resize() {
                 width = window.innerWidth 
              //       + minWidthPoly2
-                    , height = 500;//(window.innerHeight < 500 ? 500 : window.innerHeight);
+                    , height = (window.innerHeight < 900 ? 900 : window.innerHeight);
                 d3.select("svg").attr("width", width).attr("height", height);
                 force.size([width, height]).resume();
 
