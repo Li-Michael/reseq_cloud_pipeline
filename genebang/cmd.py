@@ -7,11 +7,11 @@ from jsonio import jsonIO
 from ConfigParser import ConfigParser
 import argparse
 
-__author__='Li Michael'
+__author__='Li-Michael  lizhenzhong@basepedia.com'
 __version__ = "v 0.1"
 
 
-class Bio(jsonIO.JsonIO):
+class Bio_cmd(jsonIO.JsonIO):
     def __init__(self, prog):
         self.prog = prog
         self.cmd = None
@@ -82,7 +82,7 @@ class Bio(jsonIO.JsonIO):
         samples = input_dict[key_samples]
         input_dict.pop(key_samples)
         
-
+        # 按sample生成 .sh
         for key in samples:
             if len(samples[key]) == 2:
                 full_cmd = cmd1.format(sample=samples[key], ref=input_dict) 
