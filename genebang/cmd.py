@@ -11,12 +11,12 @@ __author__='Li Michael'
 __version__ = "v 0.1"
 
 
-class Bio_exec(jsonIO.JsonIO):
+class Bio(jsonIO.JsonIO):
     def __init__(self, prog):
         self.prog = prog
         self.cmd = None
         self.section = None
-        self.option = None
+        self.option = [] 
         self.args = None
 
         self.cfgfile = None
@@ -58,23 +58,45 @@ class Bio_exec(jsonIO.JsonIO):
             kvs[sections] = conf.items(sections)
         return kvs
 
-    def command(self, input_json, configfile, key_input=None, encoding=None,sections={'Section1':'-', 'Section2':'--'}, sep=' ', **kw):
-        input_dict = self.parseJson(input_json, key=key_input, encoding=encoding)
-        print input_dict 
+    def command(self, input_sample, configfile, key_input=None, encoding=None, sections={'Section1':'-', 'Section2':'--'}, sep=' ', **kw):
+        #input_dict = self.parseJson(input_json, key=key_input, encoding=encoding)
         conf = ConfigParser()
         conf.read(configfile)
-        print 11
-        print self.prog        
         #sections = {'Section1':'-', 'Section2':'--'}
-        print sections
+        print [i for i in sections.items()]
+        for key,values in sections.items():
+            self.option += [' '.join(map(lambda i: values+i[0]+sep+i[1], conf.items(key)) ),]
+        
+        cmd1 = ' '.join([self.prog, conf.get('CMD', 'cmd')] +  self.option)
+        
+        # **kw 用来扩充功能 
         if kw == {}:
-            cmd1 = ' '.join([self.prog, conf.get('CMD','cmd')])
-            for key,values in sections.items():
-                cmd2 = ' '.join(map(lambda i: values+i[0]+sep+i[1],conf.items(key)) )
-        cmd = cmd1 + ' ' + cmd2
-        return cmd
+            return cmd1
+        else:
+            return cmd1
+    
+    # 用来按sample写 .sh 文件
+    def write(self, input_json, configfile, key_input=None, key_samples=None, encoding=None, sections={'Section1':'-', 'Section2':'--'}, sep=' ', **kw):
+        cmd1 = self.command(input_json, configfile, key_input=key_input, encoding=encoding, sections=sections, sep=sep, kw=kw)
+        input_dict = self.parseJson(input_json, key=key_input, encoding=encoding)
+        samples = input_dict[key_samples]
+        input_dict.pop(key_samples)
+        
 
-    def write(self, s_input, key=None, encoding=None):
-        pass    
+        for key in samples:
+            if len(samples[key]) == 2:
+                full_cmd = cmd1.format(sample=samples[key], ref=input_dict) 
+            elif len(samples[key]) == 1:
+                full_cmd = cmd1.format(sample=samples[key], ref=input_dict)
+            else: 
+                sys.stderr.write("[ERROR] Check the sample's numbers!\n")
+                sys.exit(1)
+            
+            # 存在样品名的问题
+            #prefix = samples[key][0].split('.')[0]
+            prefix = key
+            with open(prefix+'.'+self.prog+'.sh', 'w') as f:
+                f.write(full_cmd + "\n")
+
 
 
