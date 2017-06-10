@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>数据质量控制</title>
+
+<link href="CSS/report.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>数据质量控制</h1>
+<br />
+<p><a href="./Data_quality_help.html">帮助文档HELP</a></p>
+<br />
+<h2>1. 样本信息</h2>
+<hr />
+<br />
+<p>样本信息列表，包含样本信息及性状分组信息</p>
+<br />
+<p><table frame="hsides" border="1" cellpadding="2" cellspacing="0">
+<caption align="top">Table: sample information list</caption>
+<tr><th>#</th><th>Samplename</th><th>Filename</th><th>SN</th><th>Category</th><th>Category name</th></tr>
+<tr><td><pre>1</pre></td><td><pre><a href="#R1">R1</a></pre></td><td><pre>test_1.fq.gz,test_2.fq.gz</pre></td><td><pre>A</pre></td><td><pre>1</pre></td><td><pre>CA</pre></td></tr>
+<tr><td><pre>2</pre></td><td><pre><a href="#R2">R2</a></pre></td><td><pre>test2_1.fq.gz,test2_2.fq.gz</pre></td><td><pre>A</pre></td><td><pre>1</pre></td><td><pre>CA</pre></td></tr>
+</table>
+</p>
+<br />
+<h2>2. 测序质量评估</h2>
+<hr />
+<br />
+<h3>2.1 样本测序质量及碱基分布</h3>
+<br />
+<p>测序错误率与碱基质量有关，受仪本身、试剂样品等多个因素共同影响。通常测序错误率与碱基质量有关，受仪本身、试剂样品等多个因素共同影响。通常序列（Reads）5’端前几个碱基的错误率相对较高，随着序列的延伸，3’端碱基错误率会不断升高，这是由通量测序的技术特点决定。此外，对于RNA-seq来说，因随机性打断及G/C，和 A/T含量分别相等的原则，理论上GC及AT含量在每个测序循环上应分别相等，且整过程稳定不变呈水平线。</p>
+<br />
+<p><a name="R1">R1 's sequencing quality</a></p>
+<p>test_1.fq.gz:</p>
+<p><img src="QC/R1.test_1.fq.gz.png" width="700" height="300" /></p>
+<p>test_2.fq.gz:</p>
+<p><img src="QC/R1.test_2.fq.gz.png" width="700" height="300" /></p>
+<br />
+<p><a name="R2">R2 's sequencing quality</a></p>
+<p>test2_1.fq.gz:</p>
+<p><img src="QC/R2.test2_1.fq.gz.png" width="700" height="300" /></p>
+<p>test2_2.fq.gz:</p>
+<p><img src="QC/R2.test2_2.fq.gz.png" width="700" height="300" /></p>
+<br />
+<h3>2.2 样本测序质量汇总表</h3>
+<br />
+<p><table frame="hsides" border="1" cellpadding="2" cellspacing="0">
+<caption align="top">Table: Summary of sequencing quality result</caption>
+<tr><th>#SN</th><th>FileName</th><th>QualityCoding</th><th>Reads</th><th>ReadLength</th><th>GC(%)</th><th>Q20(%)</th><th>Q30(%)</th><th>LowQ(<5)</th><th>Ns(%)</th></tr>
+<tr><td><pre>R1</pre></td><td><pre>test_1.fq.gz</pre></td><td><pre>Illumina 1.5</pre></td><td><pre>2250</pre></td><td><pre>100</pre></td><td><pre>53</pre></td><td><pre>93.29%</pre></td><td><pre>87.07%</pre></td><td><pre>3.21%</pre></td><td><pre>0.14%</pre></td></tr>
+<tr><td><pre>R1</pre></td><td><pre>test_2.fq.gz</pre></td><td><pre>Illumina 1.5</pre></td><td><pre>2250</pre></td><td><pre>100</pre></td><td><pre>53</pre></td><td><pre>99.18%</pre></td><td><pre>94.00%</pre></td><td><pre>0.18%</pre></td><td><pre>0.00%</pre></td></tr>
+<tr><td><pre>R2</pre></td><td><pre>test2_1.fq.gz</pre></td><td><pre>Illumina 1.5</pre></td><td><pre>2250</pre></td><td><pre>100</pre></td><td><pre>53</pre></td><td><pre>94.44%</pre></td><td><pre>83.94%</pre></td><td><pre>1.75%</pre></td><td><pre>0.19%</pre></td></tr>
+<tr><td><pre>R2</pre></td><td><pre>test2_2.fq.gz</pre></td><td><pre>Illumina 1.5</pre></td><td><pre>2250</pre></td><td><pre>100</pre></td><td><pre>53</pre></td><td><pre>94.60%</pre></td><td><pre>86.13%</pre></td><td><pre>2.27%</pre></td><td><pre>0.20%</pre></td></tr>
+</table>
+</p>
+<br />
+<p><pre>Note:
+    Reads：由测序得到的原始图像数据经base calling转化而来的原始序列reads。
+    ReadLength：测序reads长度，总测序量 = Reads * ReadLength
+    GC：G+C的数量占总的碱基数目的比例
+    Q20：测序base质量>20 的比例，即错误率 < 1%（Q20：表示测序错误率为1%）
+    Q30：测序base质量>30 的比例，即错误率 < 0.1%（Q20：表示测序错误率为0.1%）
+</pre></p>
+
+</body></html>

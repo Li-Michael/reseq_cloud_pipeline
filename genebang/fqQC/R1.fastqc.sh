@@ -1,0 +1,1 @@
+fastqc -t 4 test_1.fq.gz test_2.fq.gz
