@@ -1,3 +1,0 @@
-#sn	file	class	class_id	classname
-R1	test_1.fq.gz,test_2.fq.gz	A	1	CA
-R2	test2_1.fq.gz,test2_2.fq.gz	A	1	CA

@@ -1,9 +1,0 @@
-{
-	"input":{
-		"rawdata":{
-			"sample1": ["fq1","fq2"],
-			"sample2": ["fq1","fq2"],
-		},
-		"reference_genome":"hg38.fa",
-	}
-}
