@@ -1,0 +1,88 @@
+{
+	"input":{
+		"cleandata_multiple_lanes":{
+			"UV0_G1":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G1/L1/Col0_UV0_G1-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G1/L1/Col0_UV0_G1-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G1/L2/Col0_UV0_G1-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G1/L2/Col0_UV0_G1-L2_2.fq.gz"]
+			},
+			"UV0_G2":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G2/L1/Col0_UV0_G2-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G2/L1/Col0_UV0_G2-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G2/L2/Col0_UV0_G2-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G2/L2/Col0_UV0_G2-L2_2.fq.gz"]
+			},
+			"UV0_G3":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G3/L1/Col0_UV0_G3-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G3/L1/Col0_UV0_G3-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G3/L2/Col0_UV0_G3-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV0_G3/L2/Col0_UV0_G3-L2_2.fq.gz"]
+			},
+			"UV1_G1":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV1_G1/L1/Col0_UV1_G1-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV1_G1/L1/Col0_UV1_G1-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV1_G1/L2/Col0_UV1_G1-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV1_G1/L2/Col0_UV1_G1-L2_2.fq.gz"]
+			},
+			"UV2_G1":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV2_G1/L1/Col0_UV2_G1-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV2_G1/L1/Col0_UV2_G1-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV2_G1/L2/Col0_UV2_G1-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV2_G1/L2/Col0_UV2_G1-L2_2.fq.gz"]
+			},
+			"UV3_G1":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G1/L1/Col0_UV3_G1-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G1/L1/Col0_UV3_G1-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G1/L2/Col0_UV3_G1-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G1/L2/Col0_UV3_G1-L2_2.fq.gz"]
+			},
+			"UV3_G2":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G2/L1/Col0_UV3_G2-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G2/L1/Col0_UV3_G2-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G2/L2/Col0_UV3_G2-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G2/L2/Col0_UV3_G2-L2_2.fq.gz"]
+			},
+			"UV3_G3":{
+				"L1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G3/L1/Col0_UV3_G3-L1_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G3/L1/Col0_UV3_G3-L1_2.fq.gz"],
+				"L2":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G3/L2/Col0_UV3_G3-L2_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data2/Col0_UV3_G3/L2/Col0_UV3_G3-L2_2.fq.gz"]
+			}
+		}
+	},
+	"config":{
+		"main":{
+			"run":"TRU",
+			"project_id":"666666",
+			"project_version":"4001",
+			"reference_genome":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/database/Arabidopsis_thaliana.TAIR10.31/GeneBwaIndex/genome.fa"
+		},
+		"software":{
+			"bwa mem":{
+				"cmd":"bwa mem",
+				"-T":"30",
+				"-h":"5",
+				"-t":"4"
+			},
+			"samtools fixmate":{
+				"cmd":"samtools fixmate",
+				"-O":"bam",
+				"--threads":"4"
+			},
+			"samtools sort":{
+				"cmd":"samtools sort",
+				"--threads":"4"
+			},
+			"samtools merge":{
+				"cmd":"samtools merge",
+				"--threads":"2"
+			},
+			"samtools index":{
+				"cmd":"samtools index"
+			},
+			"mappingQC":{
+				"cmd":"mappingQC.py"
+			},
+			"picard mark_duplicates":{
+				"cmd":"picard.jar MarkDuplicates"
+			},
+			"samtools flagstat":{
+				"cmd":"samtools flagstat",
+				"--threads":"2"
+			},
+			"samtools stats":{
+				"cmd":"samtools stats",
+				"--threads":"2"
+			}
+		}
+	},
+	"output":{
+		"workspace":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/"
+	}
+}
+

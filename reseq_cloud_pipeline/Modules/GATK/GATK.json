@@ -1,0 +1,167 @@
+{
+	"input":{
+		"bam_list":{
+			"UV0_G2":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping//output/UV0_G2/L2/UV0_G2.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping//output/UV0_G2/L1/UV0_G2.L1.bwa.sort.bam"
+			},
+			"UV3_G2":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping//output/UV3_G2/L2/UV3_G2.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping//output/UV3_G2/L1/UV3_G2.L1.bwa.sort.bam"
+			},
+			"UV3_G3":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping//output/UV3_G3/L2/UV3_G3.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping//output/UV3_G3/L1/UV3_G3.L1.bwa.sort.bam"
+			},
+			"UV0_G1":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping//output/UV0_G1/L2/UV0_G1.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G1/L1/UV0_G1.L1.bwa.sort.bam"
+			},
+			"UV3_G1":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G1/L2/UV3_G1.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G1/L1/UV3_G1.L1.bwa.sort.bam"
+			},
+			"UV1_G1":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV1_G1/L2/UV1_G1.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV1_G1/L1/UV1_G1.L1.bwa.sort.bam"
+			},
+			"UV2_G1":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV2_G1/L2/UV2_G1.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV2_G1/L1/UV2_G1.L1.bwa.sort.bam"
+			},
+			"UV0_G3":{
+				"L2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G3/L2/UV0_G3.L2.bwa.sort.bam",
+				"L1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G3/L1/UV0_G3.L1.bwa.sort.bam"
+			}
+		}
+	},
+	"config":{
+		"main":{
+			"run":"TRUE",
+			"project_id":"666666",
+			"project_version":"4001",
+			"reference_genome":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/database/Arabidopsis_thaliana.TAIR10.31/GeneBwaIndex/genome.fa",
+			"reference_gtf":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/database/Arabidopsis_thaliana.TAIR10.31/Annotation/genome.gtf"
+			//"software":"SOAPnuke filter",
+			//"version":"1.5.2"
+		},
+		"software":{
+			"samtools merge":{
+				"cmd":"samtools merge",
+				"--threads":"2"
+			},
+			"samtools index":{
+				"cmd":"samtools index"
+			},
+			"picard mark_duplicates":{
+				"cmd":"picard.jar MarkDuplicates"
+			},
+			"GATK HC":{
+				"cmd":"GenomeAnalysisTK.jar",
+				"-T": "HaplotypeCaller",
+			   	"--maxReadsInRegionPerSample":"10000",
+			   	"--min_base_quality_score":"10",
+			   	"--minReadsPerAlignmentStart":"10",
+			   	"--max_alternate_alleles":"6",
+			   	"--maxNumHaplotypesInPopulation":"128",
+			   	"--minPruning":"2",
+			   	"--numPruningSamples":"1", 
+				"-globalMAPQ":"45",  
+				"-stand_emit_conf":"10",
+				"-stand_call_conf":"30",
+				"-nt":"1",
+				"-nct":"1",
+			   	//"-R":"/data/database/hgdownload.cse.ucsc.edu/Hg38-bwa/hg38.fa",  //main{reference_genome}
+				"--sample_ploidy":"2",
+				//"--dbsnp":"/data/database/GATK/hg38bundle/dbsnp_144.hg38.vcf.gz",  //for human
+			   	"--emitRefConfidence":"GVCF"         // generate g.vcf, convienting to call cohort
+			},
+			"GATK GenotypeGVCFs":{
+				"cmd":"GenomeAnalysisTK.jar",
+				"-T": "GenotypeGVCFs",
+			   	"-nt":"1",
+				"-nct":"1"
+			   	//"-R":"/data/database/hgdownload.cse.ucsc.edu/Hg38-bwa/hg38.fa",  //main{reference_genome}
+			},
+			"GATK SNP":{
+				"cmd":"GenomeAnalysisTK.jar",
+				"-T":"SelectVariants",
+				"-selectType":"SNP"
+			}, 
+			"GATK INDEL":{
+				"cmd":"GenomeAnalysisTK.jar",
+				"-T":"SelectVariants",
+				"-selectType":"INDEL"
+			},
+			"GATK filterSNP":{
+				"cmd":"GenomeAnalysisTK.jar",
+				"-T":"VariantFiltration",
+				"--clusterSize":"3",
+				"--clusterWindowSize":"10",
+			   	//"--maskName":"aroundIndel",
+				//"--mask":"$outdir/cohort.indel.vcf",
+			   	"-maskExtend":"3",
+			   	"-filterNotInMask":"",
+			   	"--filterName":"\"highMQRankSum\"",
+			   	"--filterExpression":"\"MQRankSum > -12.5\"",
+			   	"--filterName":"\"lowFS\"",
+			   	"--filterExpression":"\"FS < 20.0\"",
+			   	"--filterName":"\"highReadPosRankSum\"",
+			   	"--filterExpression":"\"ReadPosRankSum > -8.0\"",
+				"--filterName":"\"highMQ\"",
+			   	"--filterExpression":"\"MQ > 40.0\"",
+				"--filterName":"\"highQD\"",
+			   	"--filterExpression":"\"QD > 2.0\"",
+			   	//"--out":"$outdir/cohot.filter.snp.vcf",
+			   	"--genotypeFilterName":"\"highDP\"",
+			   	"--genotypeFilterExpression":"\"DP > 8.0\""
+			},
+			"GATK filterINDEL":{
+				"cmd":"GenomeAnalysisTK.jar",
+				"-T":"VariantFiltration",
+				//"--clusterSize":"3",
+				//"--clusterWindowSize":"10",
+				//"-maskExtend":"3",
+			   	"--filterExpression":"\"MQ > 40.0\"",
+			   	//"-filterNotInMask":"",
+			   	"--filterName":"\"highMQRankSum\"",
+			   	"--filterExpression":"\"MQRankSum > -12.5\"",
+			   	//"--genotypeFilterName":"\"highDP\"",
+			   	"--genotypeFilterExpression":"\"DP > 8.0\""
+			},
+			"gtfToGene":{
+				"cmd":"gtfToGenePred"
+			},
+			"retrieve_seq_from_fasta":{
+				"cmd":"retrieve_seq_from_fasta.pl"
+			},
+			"mergepop_GATK":{
+				"cmd":"mergepop_GATK.py"
+			},
+			"vcf2annovar":{
+				"cmd":"vcf2annovar.py"
+			},
+			"convert2annovar":{
+				"cmd":"convert2annovar.pl",
+				"-format":"vcf4old"
+			},
+			"table_annovar":{
+				"cmd":"table_annovar.pl"
+			},
+			"mut_sub_pattern":{
+				"cmd":"mut_sub_pattern.py"
+			},
+			"varanno.stat":{
+				"cmd":"varanno.stat.py"
+			},
+			"plot_varanno":{
+				"cmd":"plot_varanno.stat.py"
+			}
+
+		}
+	},
+	"output":{
+		"workspace":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/GATK/"
+	}
+}
+

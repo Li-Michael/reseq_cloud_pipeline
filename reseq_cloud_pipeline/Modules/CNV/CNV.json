@@ -1,0 +1,52 @@
+{
+	"input":{
+		"bam_list":{
+			"UV0_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G1/UV0_G1.bwa.sort.dup.bam",
+			"UV0_G2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G2/UV0_G2.bwa.sort.dup.bam",
+			"UV0_G3":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G3/UV0_G3.bwa.sort.dup.bam",
+			"UV1_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV1_G1/UV1_G1.bwa.sort.dup.bam",
+			"UV2_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV2_G1/UV2_G1.bwa.sort.dup.bam",
+			"UV3_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G1/UV3_G1.bwa.sort.dup.bam",
+			"UV3_G2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G2/UV3_G2.bwa.sort.dup.bam",
+			"UV3_G3":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G3/UV3_G3.bwa.sort.dup.bam"
+		}
+	},
+	"config":{
+		"main":{
+			"run":"TRUE",
+			"project_id":"666666",
+			"project_version":"4001",
+			"reference_genome":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/database/Arabidopsis_thaliana.TAIR10.31/GeneBwaIndex/genome.fa"
+			//"software":"SOAPnuke filter",
+			//"version":"1.5.2"
+		},
+		"software":{
+			//./cnvnator -root NA12878.root -chrom 1 2 3  -tree NA12878_ali.bam
+			"CNVnator extractreads":{
+				"cmd":"cnvnator",
+			   	"-unique":""         // generate g.vcf, convienting to call cohort
+			},
+			"CNVnator his":{
+				"cmd":"cnvnator",
+			   	"-his":"100"         // generate g.vcf, convienting to call cohort
+			},
+			"CNVnator stat":{
+				"cmd":"cnvnator",
+			   	"-stat":"100"         // generate g.vcf, convienting to call cohort
+			},
+			"CNVnator partition":{
+				"cmd":"cnvnator",
+			   	"-partition":"100"         // generate g.vcf, convienting to call cohort
+			},
+			"CNVnator call":{
+				"cmd":"cnvnator",
+			   	"-call":"100"         // generate g.vcf, convienting to call cohort
+			}
+
+		}
+	},
+	"output":{
+		"workspace":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/CNV/"
+	}
+}
+

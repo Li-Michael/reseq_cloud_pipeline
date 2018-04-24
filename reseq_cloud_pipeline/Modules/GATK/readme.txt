@@ -1,0 +1,3 @@
+# readme.txt
+1. 采用HC工具先对bam文件生成gvcf，然后进行GenotypeGVCFs，生产cohort的vcf
+2. 若数据量够，可以用VariantRecalibrator+ApplyRecalibration进行结果校正和过滤;更通用的是VariantFiltration工具直接进行过滤

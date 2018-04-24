@@ -1,0 +1,54 @@
+{
+	"input":{
+		"bam_list":{
+			"UV0_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G1/UV0_G1.bwa.sort.dup.bam",
+			"UV0_G2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G2/UV0_G2.bwa.sort.dup.bam",
+			"UV0_G3":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV0_G3/UV0_G3.bwa.sort.dup.bam",
+			"UV1_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV1_G1/UV1_G1.bwa.sort.dup.bam",
+			"UV2_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV2_G1/UV2_G1.bwa.sort.dup.bam",
+			"UV3_G1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G1/UV3_G1.bwa.sort.dup.bam",
+			"UV3_G2":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G2/UV3_G2.bwa.sort.dup.bam",
+			"UV3_G3":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/mapping/output/UV3_G3/UV3_G3.bwa.sort.dup.bam"
+		}
+	},
+	"config":{
+		"main":{
+			"run":"TRUE",
+			"project_id":"666666",
+			"project_version":"4001",
+			"reference_genome":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/database/Arabidopsis_thaliana.TAIR10.31/GeneBwaIndex/genome.fa"
+			//"software":"SOAPnuke filter",
+			//"version":"1.5.2"
+		},
+		"software":{
+			"bam2cfg":{
+				"cmd":"bam2cfg.pl",
+				"-q":"35",  
+				"-g":"",  
+				"-h":"",  
+				"-c":"4",  
+				"-v":"1",  
+				"-n":"10000"  
+			},
+			"breakdancer-max":{
+				"cmd":"breakdancer-max",
+			   	"-s":"7",
+				"-c":"3",
+				"-m":"1000000000",
+				"-q":"25",
+				"-r":"2",
+				"-x":"1000",
+				//"-t":"",
+				"-y":"40"
+			},
+			"stat":{
+				"cmd":"sv_stat.py"
+			}
+
+		}
+	},
+	"output":{
+		"workspace":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/SV/"
+	}
+}
+

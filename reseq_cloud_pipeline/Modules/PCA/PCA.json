@@ -1,0 +1,37 @@
+{
+	"input":{
+		"cohort_list":{
+			"group1":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/GATK/output/cohort.snp.filter.vcf"
+		}
+	},
+	"config":{
+		"main":{
+			"run":"TRUE",
+			"project_id":"666666",
+			"project_version":"4001",
+			"reference_genome":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/database/Arabidopsis_thaliana.TAIR10.31/GeneBwaIndex/genome.fa"
+			//"software":"SOAPnuke filter",
+			//"version":"1.5.2"
+		},
+		"software":{
+			"vcftools":{
+				"cmd":"vcftools"
+			},
+			"plink":{
+				"cmd":"plink",
+				"--make-bed": ""
+			},
+			"gcta":{
+				"cmd":"gcta64"
+			},
+			"PCA_plot":{
+				"cmd":"PCA_plot.py"
+			}
+
+		}
+	},
+	"output":{
+		"workspace":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/PCA/"
+	}
+}
+

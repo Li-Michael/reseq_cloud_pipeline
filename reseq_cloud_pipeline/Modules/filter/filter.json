@@ -1,0 +1,45 @@
+{
+	"input":{
+		"rawdata_multiple_lanes":{
+			"18A2":{
+				"Lane1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18A2/Lane1/DRR001191_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18A2/Lane1/DRR001191_2.fq.gz"]
+			},
+			"18C2":{
+				"Lane1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18C2/Lane1/DRR001192_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18C2/Lane1/DRR001192_2.fq.gz"]
+			},
+			"18H4":{
+				"Lane1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18H4/Lane1/DRR001193_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18H4/Lane1/DRR001193_2.fq.gz"]
+			},
+			"18J1":{
+				"Lane1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18J1/Lane1/DRR001194_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18J1/Lane1/DRR001194_2.fq.gz"]
+			},
+			"18L2":{
+				"Lane1":["/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18L2/Lane1/DRR001195_1.fq.gz","/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/test_data/18L2/Lane1/DRR001195_2.fq.gz"]
+			}
+		}
+	},
+	"config":{
+		"main":{
+			"run":"TRUE",
+			"project_id":"666666",
+			"project_version":"4001",
+			"software":"SOAPnuke filter"
+		},
+		"software":{
+			"SOAPnuke filter":{
+				"cmd":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Modules/filter_src/SOAPnuke filter",
+				"version":"1.5.2",
+				//"--adpater1":"AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC",
+				//"--adpater2":"AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA",
+				"--lowQual":"5",
+				"--qualRate":"0.5",
+				"--nRate":"0.1",
+				"--index":"",
+				"--cut":"0.15"
+			}
+		}
+	},
+	"output":{
+		"workspace":"/its1/rongzhengqin/pipeline/Animal_And_Plant_Resequencing/Example/filter"
+	}
+}

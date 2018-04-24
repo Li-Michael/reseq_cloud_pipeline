@@ -1,0 +1,20 @@
+BreakDancer Pipeline
+Step 1. Create a configuration file using bam2cfg.pl
+e.g.,
+myDirectory/bam2cfg.pl -g -h tumor.bam normal.bam > BRC6.cfg
+bam2cfg now only has the perl version.
+
+Manually view the insert size and flag distribution results in BRC6.cfg to see if there are any data quality issue. Usually std/mean should be < 0.2 or 0.3 at most. The flag 32(x%), represents percent of chimeric insert, this number (x%) should usually be smaller than 3%.
+
+View png files for the insert size distribution. You should usually see a normal distribution, a bimodal distribution is undesirable and it is not recommended to continue BreakDancerMax step with this situation existing.
+
+
+Step 2. Detect inter-chromosomal translocations
+e.g.,
+myDirectory/BreakDancerMax.pl -t -q 10 -f -d BRC6.ctx BRC6.cfg > BRC6.ctx
+      for perl version;
+myDirectory/breakdancer_max -t -q 10 -d BRC6.ctx BRC6.cfg > BRC6.ctx
+      for cpp version.
+The -d option dumps CTX supporting read pairs into fastq files (in this case BRC6.ctx) by library.
+
+This step normally takes 12 hours or so for three bam files, 8 hours or so for two bam files for cpp version, around three days for perl version.
